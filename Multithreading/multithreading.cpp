@@ -4,16 +4,16 @@
 #include <mutex>
 #include <chrono>
 
-std::atomic<bool> foo = false;
+std::condition_variable foo;
+std::mutex mtx;
 
 void second_thread() {
 	while (true) {
-		if (foo) {
-			std::cout << "-----------------------------------------------" << '\n';
-			std::cout << "      | processing a notification... |" << '\n';
-			std::cout << "-----------------------------------------------" << '\n';
-			foo = false;
-		}
+		std::unique_lock<std::mutex> ul(mtx);
+		foo.wait(ul);
+		std::cout << "-----------------------------------------------" << '\n';
+		std::cout << "      | processing a notification... |" << '\n';
+		std::cout << "-----------------------------------------------" << '\n';
 	}
 }
 
@@ -24,7 +24,7 @@ int main() {
 
 	while (true) {
 		if (count % 10 == 0) {
-			foo = true;
+			foo.notify_one();
 		}
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(300));

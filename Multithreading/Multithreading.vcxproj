@@ -23,6 +23,7 @@
     <ProjectGuid>{F326E0AE-351C-4D0A-8AFB-A2ED2A78788B}</ProjectGuid>
     <RootNamespace>Multithreading</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Multithreading</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
